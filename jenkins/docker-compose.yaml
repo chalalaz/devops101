@@ -27,7 +27,7 @@ services:
                     - docker
         ports:
             - 2376:2376
-            - ${HOST_WWW}:9000
+            - ${HOST_APP}:9000
         tty: true
         volumes:
             - ${HOST_JENKINS_DATA}:/var/jenkins_home
