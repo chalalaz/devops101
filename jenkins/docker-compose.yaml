@@ -3,13 +3,36 @@ services:
     jenkins:
         build:
             context: ./
-            args:
-                HOST_UID: ${HOST_UID}
-                HOST_GID: ${HOST_GID}
         restart: unless-stopped
+        tty: true
         volumes:
-            - ${HOST_DOCKER}:/var/run/docker.sock
+            - ${HOST_DOCKER_CERT}:/certs/client:ro
             - ${HOST_JENKINS_DATA}:/var/jenkins_home
+        environment:
+            - DOCKER_HOST=tcp://docker:2376
+            - DOCKER_CERT_PATH=/certs/client
+            - DOCKER_TLS_VERIFY=1
+        networks:
+            - docker
         ports:
-            - "${HOST_WWW}:8080"
-            - "${HOST_OTHER}:50000"
+            - ${HOST_WWW}:8080
+            - ${HOST_OTHER}:50000
+    dind:
+        image: docker:dind
+        privileged: true
+        restart: always
+        networks:
+            docker:
+                aliases:
+                    - docker
+        ports:
+            - 2376:2376
+            - ${HOST_WWW}:9000
+        tty: true
+        volumes:
+            - ${HOST_JENKINS_DATA}:/var/jenkins_home
+            - ${HOST_DOCKER_CERT}:/certs/client
+        environment:
+            - DOCKER_TLS_CERTDIR=/certs
+networks:
+  docker:
