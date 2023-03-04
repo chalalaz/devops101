@@ -5,5 +5,5 @@ variable "cidr_block" {
 
 variable "key_name" {
   description = "Name of keypair to ssh"
-  default = ""
+  default = "" # Your key pair name
 }

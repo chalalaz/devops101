@@ -28,12 +28,12 @@ resource "aws_instance" "jenkins" {
     sudo sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
     sudo apt-get update -y
     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-    sudo usermod -aG docker ubuntu
+    sudo usermod -aG docker ubuntu jenkins
     sudo apt-get install jenkins -y
     sudo systemctl daemon-reload
     sudo systemctl start jenkins.service
     sudo systemctl status jenkins
-    git clone https://github.com/chalalaz/devops101.git && mv devops101 /home/ubuntu
+    git clone --single-branch --branch nginx-proxy https://github.com/chalalaz/devops101.git && mv devops101 /home/ubuntu
     EOF
   tags = {
     Name = "Jenkins"
@@ -48,6 +48,14 @@ resource "aws_security_group" "jenkins_sg" {
     description      = "Allow from http"
     from_port        = 80
     to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = [var.cidr_block]
+  }
+
+  ingress {
+    description      = "Allow from jenkins"
+    from_port        = 8080
+    to_port          = 8080
     protocol         = "tcp"
     cidr_blocks      = [var.cidr_block]
   }
