@@ -28,11 +28,12 @@ resource "aws_instance" "jenkins" {
     sudo sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
     sudo apt-get update -y
     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-    sudo usermod -aG docker ubuntu jenkins
+    sudo usermod -aG docker ubuntu
     sudo apt-get install jenkins -y
     sudo systemctl daemon-reload
     sudo systemctl start jenkins.service
     sudo systemctl status jenkins
+    sudo usermod -aG docker jenkins
     git clone --single-branch --branch nginx-proxy https://github.com/chalalaz/devops101.git && mv devops101 /home/ubuntu
     EOF
   tags = {
