@@ -9,7 +9,10 @@
 ## Terraform
 1. install terraform
 2. run terraform to setup infra for our application
-
+or  use docker compose below
+pre-install
+1. export AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+2. replace key_name with your key pair name for access to ec2
 ```
     docker compose run --rm tf init
     docker compose run --rm tf fmt
