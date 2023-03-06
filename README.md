@@ -10,11 +10,12 @@
 1. install terraform
 2. run terraform to setup infra for our application
 
-''' docker compose run --rm tf init
+```
+    docker compose run --rm tf init
     docker compose run --rm tf fmt
     docker compose run --rm tf validate
     docker compose run --rm tf plan
     docker compose run --rm tf apply
-'''
+```
 
 https://youtu.be/qfOSaCFnYCk
