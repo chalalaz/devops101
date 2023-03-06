@@ -1,5 +1,5 @@
 terraform {
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -45,43 +45,43 @@ resource "aws_security_group" "jenkins_sg" {
   description = "Allow Jenkins Traffic"
 
   ingress {
-    description      = "Allow from http"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = [var.cidr_block]
+    description = "Allow from http"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [var.cidr_block]
   }
 
   ingress {
-    description      = "Allow from jenkins"
-    from_port        = 8080
-    to_port          = 8080
-    protocol         = "tcp"
-    cidr_blocks      = [var.cidr_block]
+    description = "Allow from jenkins"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = [var.cidr_block]
   }
 
   ingress {
-    description      = "Allow from admin NPM"
-    from_port        = 81
-    to_port          = 81
-    protocol         = "tcp"
-    cidr_blocks      = [var.cidr_block]
+    description = "Allow from admin NPM"
+    from_port   = 81
+    to_port     = 81
+    protocol    = "tcp"
+    cidr_blocks = [var.cidr_block]
   }
 
   ingress {
-    description      = "Allow from https"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-    cidr_blocks      = [var.cidr_block]
+    description = "Allow from https"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [var.cidr_block]
   }
 
   ingress {
-    description      = "Allow SSH inbound"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = [var.cidr_block]
+    description = "Allow SSH inbound"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [var.cidr_block]
   }
 
   egress {
