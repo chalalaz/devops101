@@ -17,7 +17,7 @@ dateFormat = "2 January 2006"
 [author]
   name = "Chaleamwat Ngawchompoo"
   image = "profile.jpg"
-  headline = "I'm only cat"
+  headline = "I'm only human"
   bio = "A little bit about you"
   links = [
   { email = "mailto:beerkkc@gmail.com" },
